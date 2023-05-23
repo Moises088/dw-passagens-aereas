@@ -4,3 +4,21 @@
     box-sizing: border-box;
     font-family: 'Rubik', sans-serif;
 }
+
+.container {
+    width: 80%;
+    margin-left: 10%;
+}
+
+.btn {
+    background: none;
+    border: none;
+}
+
+.color-primary {
+    color: #F2473F;
+}
+
+.bg-primary {
+    background-color: #F2473F;
+}

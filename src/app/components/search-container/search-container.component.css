@@ -135,3 +135,18 @@ label {
 .btn-form:hover {
     background: linear-gradient(308.6deg, rgb(234, 61, 53) -7.94%, rgb(242, 71, 63) 79.38%);
 }
+
+.group.has-error input,
+.group.has-error select {
+    border-color: red;
+}
+
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.group.has-error .input-container {
+    margin-top: 20px;
+}

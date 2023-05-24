@@ -1,0 +1,72 @@
+<div class="container">
+  <app-search-container></app-search-container>
+
+  <div class="container-results">
+    <div class="container-filter">
+      <h3>268 resultados</h3>
+
+      <div class="filter">
+        <p>Ordernar por</p>
+        <div>
+          <input type="radio" id="relevancia" name="ordem" value="relevancia">
+          <label for="relevancia">Relevância</label>
+        </div>
+        <div>
+          <input type="radio" id="maior-preco" name="ordem" value="maior-preco">
+          <label for="maior-preco">Maior Preço</label>
+        </div>
+        <div>
+          <input type="radio" id="menor-preco" name="ordem" value="menor-preco">
+          <label for="menor-preco">Menor Preço</label>
+        </div>
+      </div>
+
+      <div class="filter">
+        <p>Empresa</p>
+        <div>
+          <label>
+            <input type="checkbox" name="company" value="gol"> Gol
+          </label>
+        </div>
+        <div>
+          <label>
+            <input type="checkbox" name="company" value="latam"> Latam
+          </label>
+        </div>
+        <div>
+          <label>
+            <input type="checkbox" name="company" value="azul"> Azul
+          </label>
+        </div>
+      </div>
+
+      <div class="filter">
+        <p>Paradas</p>
+        <div>
+          <label>
+            <input type="radio" name="stops" value="direct"> Voo Direto
+          </label>
+        </div>
+        <div>
+          <label>
+            <input type="radio" name="stops" value="1-stop"> 1 Parada
+          </label>
+        </div>
+        <div>
+          <label>
+            <input type="radio" name="stops" value="2-stops"> 2 Paradas
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-left">
+      <app-flight-card></app-flight-card>
+      <app-flight-card></app-flight-card>
+      <app-flight-card></app-flight-card>
+      <app-flight-card></app-flight-card>
+      <app-flight-card></app-flight-card>
+      <app-flight-card></app-flight-card>
+    </div>
+  </div>
+</div>

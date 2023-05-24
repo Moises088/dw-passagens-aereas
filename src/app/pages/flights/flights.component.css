@@ -1,0 +1,48 @@
+.container {
+    margin-top: 30px;
+}
+
+.container-results {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 50px;
+}
+
+.container-filter {
+    width: 220px;
+    padding: 10px;
+    margin-right: 10px;
+}
+
+.container-left {
+    width: calc(100% - 230px);
+}
+
+.filter {
+    margin-top: 20px;
+    font-size: 17px;
+}
+
+.filter p {
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.container-filter input[type="radio"],
+.container-filter input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.container-filter input[type="radio"]:checked,
+.container-filter input[type="checkbox"]:checked {
+    outline-color: blue;
+}
+
+.container-filter div {
+    margin-bottom: 5px;
+}
+
+.input-check {
+    display: flex;
+    align-items: center;
+}

@@ -11,6 +11,8 @@ import { PromotionCardComponent } from './components/promotion-card/promotion-ca
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { NgxMaskModule } from 'ngx-mask';
+import { FlightsComponent } from './pages/flights/flights.component';
+import { FlightCardComponent } from './components/flight-card/flight-card.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { NgxMaskModule } from 'ngx-mask';
     SearchContainerComponent,
     PromotionCardComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    FlightsComponent,
+    FlightCardComponent
   ],
   imports: [
     BrowserModule,

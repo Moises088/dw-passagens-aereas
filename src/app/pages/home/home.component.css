@@ -28,3 +28,19 @@
 .container-form {
     margin-top: -150px;
 }
+
+.container-promotions {
+    margin-top: 30px;
+}
+
+.container-card-promotions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+app-promotion-card {
+    width: 24%;
+    margin-inline: 0.5%;
+}

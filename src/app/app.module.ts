@@ -7,13 +7,15 @@ import { HomeComponent } from './pages/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FormsModule } from '@angular/forms';
 import { SearchContainerComponent } from './components/search-container/search-container.component';
+import { PromotionCardComponent } from './components/promotion-card/promotion-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     NavbarComponent,
-    SearchContainerComponent
+    SearchContainerComponent,
+    PromotionCardComponent
   ],
   imports: [
     BrowserModule,

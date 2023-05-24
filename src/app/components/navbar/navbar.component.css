@@ -6,6 +6,7 @@
     position: fixed;
     display: flex;
     align-items: center;
+    z-index: 999;
 }
 
 .navbar-container {

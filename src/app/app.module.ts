@@ -8,6 +8,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { FormsModule } from '@angular/forms';
 import { SearchContainerComponent } from './components/search-container/search-container.component';
 import { PromotionCardComponent } from './components/promotion-card/promotion-card.component';
+import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -15,12 +18,15 @@ import { PromotionCardComponent } from './components/promotion-card/promotion-ca
     HomeComponent,
     NavbarComponent,
     SearchContainerComponent,
-    PromotionCardComponent
+    PromotionCardComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    NgxMaskModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

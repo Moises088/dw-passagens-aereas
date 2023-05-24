@@ -1,14 +1,14 @@
 <nav class="navbar">
   <div class="container">
     <div class="navbar-container">
-      <div class="logo">
+      <div class="logo" (click)="home()">
         <h2>Voo</h2>
         <span>Certo</span>
       </div>
 
       <ul>
-        <li>
-          <button class="btn btn-login">
+        <li *ngIf="showButtonLogin">
+          <button (click)="login()" class="btn btn-login">
             <i class="fa-regular fa-user"></i>
             Iniciar sessão
           </button>

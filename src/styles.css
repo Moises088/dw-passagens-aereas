@@ -6,8 +6,8 @@
 }
 
 .container {
-    width: 80%;
-    margin-left: 10%;
+    width: 85%;
+    margin-left: 7.5%;
 }
 
 .btn {
@@ -21,4 +21,91 @@
 
 .bg-primary {
     background-color: #F2473F;
+}
+
+/* Estilize o wrapper do datepicker */
+.ui-datepicker {
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+/* Estilize o cabeçalho do datepicker */
+.ui-datepicker-header {
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #ccc;
+    padding: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Estilize os dias da semana no datepicker */
+.ui-datepicker-calendar th {
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #ccc;
+    padding: 5px;
+    text-align: center;
+}
+
+/* Estilize os dias no datepicker */
+.ui-datepicker-calendar td {
+    padding: 5px;
+    text-align: center;
+}
+
+/* Estilize os botões de navegação no datepicker */
+.ui-datepicker-prev,
+.ui-datepicker-next {
+    background-color: #f5f5f5;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 2px 5px;
+}
+
+/* Estilize o hover dos botões de navegação no datepicker */
+.ui-datepicker-prev:hover,
+.ui-datepicker-next:hover {
+    background-color: #ccc;
+}
+
+/* Estilize a data selecionada no datepicker */
+.ui-datepicker-calendar .ui-state-active {
+    background-color: #ff8c00;
+    color: #fff;
+}
+
+/* Personalize os botões de navegação no datepicker */
+.ui-datepicker-header .ui-datepicker-prev span,
+.ui-datepicker-header .ui-datepicker-next span {
+    display: none;
+}
+
+.ui-datepicker-header .ui-datepicker-prev:after {
+    content: "Anterior";
+    display: inline-block;
+}
+
+.ui-datepicker-header .ui-datepicker-next:after {
+    content: "Próximo";
+    display: inline-block;
+}
+
+.ui-datepicker-calendar td a {
+    display: block;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    color: #333;
+    text-decoration: none;
+}
+
+.ui-datepicker-calendar td a.ui-state-active,
+.ui-datepicker-calendar td a:hover {
+    background-color: #f2483fe1;
+    color: #fff;
 }

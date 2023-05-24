@@ -1,0 +1,71 @@
+<div class="container-form">
+    <div class="form-top">
+      <h2 class="title">PASSAGENS AÉREAS</h2>
+
+      <div class="container-type container-type-active">Ida + Volta</div>
+      <div class="container-type">Somente ida</div>
+    </div>
+
+    <div class="form-bottom">
+      <form action="">
+          <div>
+              <label for="">De onde você está saindo?</label>
+              <div class="input-group">
+                  <div class="input-container">
+                      <input type="text" placeholder="Aeroporto ou cidade" class="input-destination" name="origin" />
+                      <i class="fas fa-plane fa-left"></i>
+                  </div>
+              </div>
+          </div>
+          <div class="destinations">
+              <i class="fa-solid fa-right-left"></i>
+          </div>
+          <div>
+              <label for="">Para onde você está indo?</label>
+              <div class="input-group">
+                  <div class="input-container">
+                      <input type="text" placeholder="Aeroporto ou cidade" class="input-destination" name="destinations" />
+                      <i class="fas fa-plane fa-right"></i>
+                  </div>
+              </div>
+          </div>
+
+          <div style="margin-left: 10px;">
+              <label for="date-ida-input">Data de ida</label>
+              <div class="input-group">
+                  <div class="input-container">
+                      <input type="text" id="date-ida-input" placeholder="Ida" (focus)="openDatePicker('date-ida-input')">
+                      <i class="fas fa-calendar-alt"></i>
+                  </div>
+              </div>
+          </div>
+          
+          <div>
+              <label for="date-volta-input">Data de volta</label>
+              <div class="input-group">
+                  <div class="input-container">
+                      <input type="text" id="date-volta-input" placeholder="Volta" (focus)="openDatePicker('date-volta-input')">
+                      <i class="fas fa-calendar-alt"></i>
+                  </div>
+              </div>
+          </div>
+          
+          <div style="margin-left: 10px;">
+              <label for="passengers-select">Passageiros</label>
+              <div class="input-group">
+                  <div class="input-container">
+                      <select id="passengers-select" [(ngModel)]="passengersCount" name="passengers">
+                          <option *ngFor="let count of passengersOptions" value="{{count}}">{{ count }} passageiro(s)</option>
+                      </select>
+                      <i class="fas fa-users"></i>
+                  </div>
+              </div>
+          </div>            
+          
+          <div style="margin-left: 10px;">
+              <button class="btn btn-form">Buscar</button>
+          </div>            
+          
+      </form>
+    </div>
+  </div>

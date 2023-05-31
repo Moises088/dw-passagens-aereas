@@ -13,6 +13,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { FlightsComponent } from './pages/flights/flights.component';
 import { FlightCardComponent } from './components/flight-card/flight-card.component';
+import { FlightComponent } from './pages/flight/flight.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { FlightCardComponent } from './components/flight-card/flight-card.compon
     LoginComponent,
     RegisterComponent,
     FlightsComponent,
-    FlightCardComponent
+    FlightCardComponent,
+    FlightComponent
   ],
   imports: [
     BrowserModule,

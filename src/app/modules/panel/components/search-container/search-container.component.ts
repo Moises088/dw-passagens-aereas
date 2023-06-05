@@ -20,6 +20,7 @@ export class SearchContainerComponent {
   destinations!: { id: number, address: string, latitude: string, longitude: string };
   goDate: string | undefined;
   backDate: string | undefined;
+  type: 'round_trip' | 'one_way' = 'round_trip';
   passengersCount: number = 1;
   passengersOptions: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
@@ -85,7 +86,8 @@ export class SearchContainerComponent {
       destinations: this.destinations.id,
       goDate: this.goDate,
       backDate: this.backDate,
-      passengers: this.passengersCount
+      passengers: this.passengersCount,
+      type: this.type
     };
 
     this.router.navigate(['/voos'], { queryParams });
@@ -103,5 +105,9 @@ export class SearchContainerComponent {
     } else {
       this.data = [];
     }
+  }
+
+  changeType(type: 'round_trip' | 'one_way') {
+    this.type = type;
   }
 }

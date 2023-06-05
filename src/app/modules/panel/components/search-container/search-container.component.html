@@ -2,8 +2,23 @@
   <div class="form-top">
     <h2 class="title">PASSAGENS AÉREAS</h2>
 
-    <div class="container-type container-type-active">Ida + Volta</div>
-    <div class="container-type">Somente ida</div>
+    <div
+      class="container-type {{
+        type == 'round_trip' ? 'container-type-active' : ''
+      }}"
+      (click)="changeType('round_trip')"
+    >
+      Ida + Volta
+    </div>
+    
+    <div
+      class="container-type {{
+        type == 'one_way' ? 'container-type-active' : ''
+      }}"
+      (click)="changeType('one_way')"
+    >
+      Somente ida
+    </div>
   </div>
 
   <div class="form-bottom">

@@ -6,8 +6,6 @@ import { PanelComponent } from './panel.component';
 import { HomeComponent } from './pages/home/home.component';
 import { SearchContainerComponent } from './components/search-container/search-container.component';
 import { PromotionCardComponent } from './components/promotion-card/promotion-card.component';
-import { LoginComponent } from './pages/login/login.component';
-import { RegisterComponent } from './pages/register/register.component';
 import { FlightsComponent } from './pages/flights/flights.component';
 import { FlightCardComponent } from './components/flight-card/flight-card.component';
 import { FlightComponent } from './pages/flight/flight.component';
@@ -22,8 +20,6 @@ import { CoreModule } from 'src/app/core/core.module';
     HomeComponent,
     SearchContainerComponent,
     PromotionCardComponent,
-    LoginComponent,
-    RegisterComponent,
     FlightsComponent,
     FlightCardComponent,
     FlightComponent

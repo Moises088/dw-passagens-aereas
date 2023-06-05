@@ -21,6 +21,11 @@
   z-index: 1081;
 }
 
+img {
+  width: 140px;
+  height: 140px;
+}
+
 @keyframes spin {
   to {
     transform: rotate(360deg);

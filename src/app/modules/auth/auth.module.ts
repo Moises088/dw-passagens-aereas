@@ -6,6 +6,7 @@ import { AuthComponent } from './auth.component';
 import { CoreModule } from 'src/app/core/core.module';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { NgxMaskModule } from 'ngx-mask';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { RegisterComponent } from './pages/register/register.component';
   imports: [
     CommonModule,
     AuthRoutingModule,
-    CoreModule
+    CoreModule,
+    NgxMaskModule.forRoot()
   ]
 })
 export class AuthModule { }

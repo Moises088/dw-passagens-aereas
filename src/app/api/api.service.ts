@@ -7,15 +7,15 @@ import { environment } from 'src/environments/environment';
 })
 export class ApiService {
 
-  private baseUrl = environment.url;
-  private accessToken = '';
+  private readonly baseUrl = environment.url;
+  private userData = { name: '', email: '', accessToken: '' };
 
-  constructor(private http: HttpClient) { }
+  constructor(private readonly http: HttpClient) { }
 
   getHeaders() {
     const headers: Record<string, any> = {};
-    if (this.accessToken) {
-      headers['Authorization'] = 'Bearer ' + this.accessToken;
+    if (this.userData.accessToken.length) {
+      headers['Authorization'] = 'Bearer ' + this.userData.accessToken;
     }
 
     headers['Access-Control-Allow-Origin'] = '*';
@@ -56,12 +56,31 @@ export class ApiService {
     })
   }
 
-  setAccessToken(accessToken: string) {
-    this.accessToken = accessToken;
+  async setUserData(userData: any) {
+    await localStorage.setItem('userData', JSON.stringify(userData))
+    this.userData = userData;
   }
 
-  getAccessToken() {
-    return this.accessToken;
+  async getUserData() {
+    if (!this.userData?.accessToken?.length) {
+      const userDataStr = await localStorage.getItem('userData');
+      if (!userDataStr) return null;
+
+      const userData = JSON.parse(userDataStr)
+      if (!userData || !userData?.accessToken) return null;
+
+      this.userData = userData;
+    }
+
+    try {
+      await this.get("/user/verify/token")
+      return this.userData;
+    } catch (error) {
+      await localStorage.removeItem("userData")
+      this.userData = { name: '', email: '', accessToken: '' };
+      return null
+    }
+
   }
 
 }

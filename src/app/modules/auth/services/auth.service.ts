@@ -14,7 +14,15 @@ export class AuthService {
     return this.api.post<any>('user/login', credentials);
   }
 
-  register(userData: { name: string, email: string, password: string }) {
+  register(userData: { name: string, email: string, cpf: string, password: string }) {
     return this.api.post<any>('user/register', userData);
+  }
+
+  setUserData(userData: any) {
+    return this.api.setUserData(userData);
+  }
+
+  getUserData() {
+    return this.api.getUserData();
   }
 }

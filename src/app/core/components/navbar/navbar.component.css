@@ -40,6 +40,16 @@ ul {
     cursor: pointer;
 }
 
+.btn-active {
+    border-color: #F2473F;
+}
+
+.btn-active i,
+.btn-active {
+    color: #F2473F;
+    margin-right: 5px;
+}
+
 .btn-login:hover {
     transform: scale(1.01);
 }

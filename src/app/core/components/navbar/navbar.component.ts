@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { AuthService } from 'src/app/modules/auth/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -8,11 +9,14 @@ import { NavigationEnd, Router } from '@angular/router';
 })
 export class NavbarComponent {
 
+  userData: any;
+
   showButtonLogin: boolean = true;
   showButtonRestrict: string[] = ['/login', '/cadastrese'];
 
   constructor(
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly authService: AuthService
   ) { }
 
   ngAfterViewInit() {
@@ -21,6 +25,8 @@ export class NavbarComponent {
         this.changeRouter(event.url);
       }
     });
+
+    this.getUserData()
   }
 
   login() {
@@ -37,5 +43,17 @@ export class NavbarComponent {
     } else {
       this.showButtonLogin = true;
     }
+  }
+
+  async getUserData() {
+    const getUserData = await this.authService.getUserData();
+    console.log(getUserData?.name)
+    if (getUserData?.name) {
+      this.userData = getUserData;
+    }
+  }
+
+  async account() {
+    
   }
 }

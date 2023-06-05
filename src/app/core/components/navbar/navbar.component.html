@@ -8,9 +8,24 @@
 
       <ul>
         <li *ngIf="showButtonLogin">
-          <button (click)="login()" class="btn btn-login">
+          <button
+            *ngIf="!userData?.name"
+            (click)="login()"
+            class="btn btn-login"
+          >
             <i class="fa-regular fa-user"></i>
             Iniciar sessão
+          </button>
+        </li>
+
+        <li *ngIf="showButtonLogin">
+          <button
+            *ngIf="userData?.name"
+            (click)="account()"
+            class="btn btn-login btn-active"
+          >
+            <i class="fa-regular fa-user"></i>
+            {{ userData.name }}
           </button>
         </li>
       </ul>

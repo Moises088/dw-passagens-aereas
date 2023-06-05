@@ -109,3 +109,22 @@
     background-color: #f2483fe1;
     color: #fff;
 }
+
+.autocomplete-container .input-container input {
+    height: 48px !important;
+    padding-left: 35px !important;
+    border: none;
+    background-color: #fff !important;
+    font-size: 16px !important;
+    border: 2px solid #ECEDF1 !important;
+    border-radius: 8px !important;
+    margin-top: -3px;
+}
+
+.autocomplete-container {
+    box-shadow: none !important;
+}
+
+.autocomplete-container.active {
+    z-index: 1 !important;
+}

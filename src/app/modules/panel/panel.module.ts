@@ -12,7 +12,7 @@ import { FlightComponent } from './pages/flight/flight.component';
 import { FormsModule } from '@angular/forms';
 import { NgxMaskModule } from 'ngx-mask';
 import { CoreModule } from 'src/app/core/core.module';
-
+import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 
 @NgModule({
   declarations: [
@@ -29,7 +29,8 @@ import { CoreModule } from 'src/app/core/core.module';
     PanelRoutingModule,
     FormsModule,
     NgxMaskModule.forRoot(),
-    CoreModule
+    CoreModule,
+    AutocompleteLibModule
   ]
 })
 export class PanelModule { }

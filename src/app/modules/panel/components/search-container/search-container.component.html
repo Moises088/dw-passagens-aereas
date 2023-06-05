@@ -1,77 +1,143 @@
 <div class="container-form">
-    <div class="form-top">
+  <div class="form-top">
     <h2 class="title">PASSAGENS AÉREAS</h2>
 
     <div class="container-type container-type-active">Ida + Volta</div>
     <div class="container-type">Somente ida</div>
-    </div>
+  </div>
 
-    <div class="form-bottom">
+  <div class="form-bottom">
     <form (ngSubmit)="validateForm()" novalidate>
-        <div class="group" [class.has-error]="formErrors['origin']">
+      <div class="group" [class.has-error]="formErrors['origin']">
         <label for="">De onde você está saindo?</label>
         <div class="input-group">
-            <div class="input-container">
-            <input type="text" placeholder="Aeroporto ou cidade" class="input-destination" name="origin" [(ngModel)]="origin" required>
+          <div class="input-container">
+            <ng-autocomplete
+              [data]="data"
+              [searchKeyword]="keyword"
+              placeholder="Aeroporto ou cidade"
+              (selected)="selectEvent($event, 'origin')"
+              (inputChanged)="onChangeSearch($event)"
+              [itemTemplate]="itemTemplate"
+              [ngModel]="origin"
+              name="origin"
+            >
+            </ng-autocomplete>
             <i class="fas fa-plane fa-left"></i>
-            </div>
+          </div>
         </div>
-        <small *ngIf="formErrors['origin']" class="error-message">* Preencha o campo</small>
-        </div>
+        <small *ngIf="formErrors['origin']" class="error-message"
+          >* Preencha o campo</small
+        >
+      </div>
 
-        <div class="destinations">
+      <div class="destinations">
         <i class="fa-solid fa-right-left"></i>
-        </div>
+      </div>
 
-        <div class="group" [class.has-error]="formErrors['destinations']">
+      <ng-template #itemTemplate let-item>
+        <a [innerHTML]="item[keyword]"></a>
+      </ng-template>
+
+      <div class="group" [class.has-error]="formErrors['destinations']">
         <label for="">Para onde você está indo?</label>
         <div class="input-group">
-            <div class="input-container">
-            <input type="text" placeholder="Aeroporto ou cidade" class="input-destination" name="destinations" [(ngModel)]="destinations" required>
+          <div class="input-container">
+            <ng-autocomplete
+              [data]="data"
+              [searchKeyword]="keyword"
+              placeholder="Aeroporto ou cidade"
+              (selected)="selectEvent($event, 'destinations')"
+              (inputChanged)="onChangeSearch($event)"
+              [itemTemplate]="itemTemplate"
+              [ngModel]="destinations"
+              name="destinations"
+            >
+            </ng-autocomplete>
             <i class="fas fa-plane fa-right"></i>
-            </div>
+          </div>
         </div>
-        <small *ngIf="formErrors['destinations']" class="error-message">* Preencha o campo</small>
-        </div>
+        <small *ngIf="formErrors['destinations']" class="error-message"
+          >* Preencha o campo</small
+        >
+      </div>
 
-        <div style="margin-left: 10px;" class="group" [class.has-error]="formErrors['goDate'] || formErrors['dateError']">
+      <div
+        style="margin-left: 10px"
+        class="group"
+        [class.has-error]="formErrors['goDate'] || formErrors['dateError']"
+      >
         <label for="date-ida-input">Data de ida</label>
         <div class="input-group">
-            <div class="input-container">
-            <input type="text" id="date-ida-input" placeholder="Ida" name="ida" [(ngModel)]="goDate" (focus)="openDatePicker('date-ida-input')" required>
+          <div class="input-container">
+            <input
+              type="text"
+              id="date-ida-input"
+              placeholder="Ida"
+              name="ida"
+              [(ngModel)]="goDate"
+              (focus)="openDatePicker('date-ida-input')"
+              required
+            />
             <i class="fas fa-calendar-alt"></i>
-            </div>
+          </div>
         </div>
-        <small *ngIf="formErrors['goDate']" class="error-message">* Preencha o campo</small>
-        </div>
+        <small *ngIf="formErrors['goDate']" class="error-message"
+          >* Preencha o campo</small
+        >
+      </div>
 
-        <div class="group" [class.has-error]="formErrors['backDate'] || formErrors['dateError']">
+      <div
+        class="group"
+        [class.has-error]="formErrors['backDate'] || formErrors['dateError']"
+      >
         <label for="date-volta-input">Data de volta</label>
         <div class="input-group">
-            <div class="input-container">
-            <input type="text" id="date-volta-input" placeholder="Volta" name="volta" [(ngModel)]="backDate" (focus)="openDatePicker('date-volta-input')" required>
+          <div class="input-container">
+            <input
+              type="text"
+              id="date-volta-input"
+              placeholder="Volta"
+              name="volta"
+              [(ngModel)]="backDate"
+              (focus)="openDatePicker('date-volta-input')"
+              required
+            />
             <i class="fas fa-calendar-alt"></i>
-            </div>
+          </div>
         </div>
-        <small *ngIf="formErrors['backDate']" class="error-message">* Preencha o campo</small>
-        <small *ngIf="formErrors['dateError']" class="error-message">A data de volta deve ser posterior à data de ida</small>
-        </div>
+        <small *ngIf="formErrors['backDate']" class="error-message"
+          >* Preencha o campo</small
+        >
+        <small *ngIf="formErrors['dateError']" class="error-message"
+          >A data de volta deve ser posterior à data de ida</small
+        >
+      </div>
 
-        <div style="margin-left: 10px;" class="group">
+      <div style="margin-left: 10px" class="group">
         <label for="passengers-select">Passageiros</label>
         <div class="input-group">
-            <div class="input-container">
-            <select id="passengers-select" [(ngModel)]="passengersCount" name="passengers">
-                <option *ngFor="let count of passengersOptions" value="{{count}}">{{ count }} passageiro(s)</option>
+          <div class="input-container">
+            <select
+              id="passengers-select"
+              [(ngModel)]="passengersCount"
+              name="passengers"
+            >
+              <option
+                *ngFor="let count of passengersOptions"
+                value="{{ count }}"
+              >
+                {{ count }} passageiro(s)
+              </option>
             </select>
             <i class="fas fa-users"></i>
-            </div>
+          </div>
         </div>
-        </div>
+      </div>
 
-        <div style="margin-left: 10px;">
+      <div style="margin-left: 10px">
         <button class="btn btn-form" type="submit">Buscar</button>
-        </div>
+      </div>
     </form>
-    </div>
-</div>  
+  </div>
+</div>

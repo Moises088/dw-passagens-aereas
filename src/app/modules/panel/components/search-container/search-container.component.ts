@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 
 import 'jquery';
 import 'jqueryui';
+import { AutocompleteService } from '../../services/autocomplete.service';
+import { lastValueFrom } from 'rxjs';
 // import '../../../assets/jquery-ui-i18n.js';
 
 declare var $: any;
@@ -14,8 +16,8 @@ declare var $: any;
 })
 export class SearchContainerComponent {
 
-  origin!: string;
-  destinations!: string;
+  origin!: { id: number, address: string, latitude: string, longitude: string };
+  destinations!: { id: number, address: string, latitude: string, longitude: string };
   goDate: string | undefined;
   backDate: string | undefined;
   passengersCount: number = 1;
@@ -23,7 +25,13 @@ export class SearchContainerComponent {
 
   formErrors: { [key: string]: boolean } = {};
 
-  constructor(private readonly router: Router) { }
+  keyword = 'address';
+  data = [];
+
+  constructor(
+    private readonly router: Router,
+    private readonly autocompleteService: AutocompleteService
+  ) { }
 
   ngAfterViewInit() {
     $('#date-volta-input').datepicker({
@@ -46,11 +54,11 @@ export class SearchContainerComponent {
   validateForm() {
     this.formErrors = {};
 
-    if (!this.origin) {
+    if (!this.origin?.id) {
       this.formErrors['origin'] = true;
     }
 
-    if (!this.destinations) {
+    if (!this.destinations?.id) {
       this.formErrors['destinations'] = true;
     }
 
@@ -73,13 +81,27 @@ export class SearchContainerComponent {
 
   navigateToFlights() {
     const queryParams = {
-      origin: this.origin,
-      destinations: this.destinations,
+      origin: this.origin.id,
+      destinations: this.destinations.id,
       goDate: this.goDate,
       backDate: this.backDate,
       passengers: this.passengersCount
     };
 
     this.router.navigate(['/voos'], { queryParams });
+  }
+
+  selectEvent(item: any, type: 'origin' | 'destinations') {
+    this[type] = item;
+    this.data = [];
+  }
+
+  async onChangeSearch(val: string) {
+    if (val.length >= 3) {
+      const response: any = await lastValueFrom(this.autocompleteService.autocomplete(val));
+      this.data = response;
+    } else {
+      this.data = [];
+    }
   }
 }

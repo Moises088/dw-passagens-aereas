@@ -8,6 +8,8 @@ import { NgxMaskModule } from 'ngx-mask';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
 import { HttpRequestInterceptor } from './core/interceptors/http-request.interceptor';
+import { AutocompleteLibModule } from 'angular-ng-autocomplete';
+
 
 @NgModule({
   declarations: [
@@ -19,7 +21,8 @@ import { HttpRequestInterceptor } from './core/interceptors/http-request.interce
     FormsModule,
     HttpClientModule,
     CoreModule,
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
+    AutocompleteLibModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpRequestInterceptor, multi: true }

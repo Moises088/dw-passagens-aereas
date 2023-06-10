@@ -15,6 +15,8 @@ export class FlightComponent implements AfterViewInit {
   flight: any;
   selectedSeats: { id: number, seat: string, active: boolean }[] = [];
 
+  paymentCompleted = false;
+
   paymentModes = [
     { id: 'CREDIT_CARD', label: "Cartão de crédito" },
     { id: 'DEBIT_CARD', label: "Cartão de débito" },
@@ -66,9 +68,13 @@ export class FlightComponent implements AfterViewInit {
     };
 
     try {
-      const response = await lastValueFrom(this.flightsService.buyTicket(ticketData));
-      window.location.href = ""
-      // Faça algo com a resposta, se necessário
+      await lastValueFrom(this.flightsService.buyTicket(ticketData));
+      this.paymentCompleted = true;
+
+      setTimeout(() => {
+        this.paymentCompleted = false;
+        window.location.href = "/conta";
+      }, 2000);
     } catch (error: any) {
       alert(error.error.message);
     }

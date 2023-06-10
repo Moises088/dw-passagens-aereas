@@ -19,7 +19,7 @@ export class SearchContainerComponent {
   origin!: { id: number, address: string, latitude: string, longitude: string };
   destinations!: { id: number, address: string, latitude: string, longitude: string };
   goDate: string | undefined;
-  backDate: string | undefined;
+  backDate: string | null = null;
   type: 'round_trip' | 'one_way' = 'round_trip';
   passengersCount: number = 1;
   passengersOptions: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -113,7 +113,7 @@ export class SearchContainerComponent {
     this.type = type;
   }
 
-  async loadFilter(origin_id: number, destination_id: number, goDate: string, backDate: string, passengers: string, type: any) {
+  async loadFilter(origin_id: number, destination_id: number, goDate: string, backDate: string | null, passengers: string, type: any) {
     const origin: any = await lastValueFrom(this.autocompleteService.placeId(origin_id));
     const destinations: any = await lastValueFrom(this.autocompleteService.placeId(destination_id));
 

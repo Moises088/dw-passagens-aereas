@@ -76,11 +76,19 @@
         </select>
       </div>
 
-      <div style="height: 100px;"></div>
+      <div style="height: 100px"></div>
 
       <div>
         <button class="btn btn-buy" (click)="buyFlight()">Comprar</button>
       </div>
     </div>
+  </div>
+</div>
+
+<div class="payment-overlay" *ngIf="paymentCompleted">
+  <div class="payment-message">
+    <img src="../../../../../assets/confirm.gif" alt="">
+    <h2>Pedido concluído!</h2>
+    <p>O pagamento está sendo processado.</p>
   </div>
 </div>

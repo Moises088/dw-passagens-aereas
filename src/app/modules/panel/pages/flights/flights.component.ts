@@ -29,7 +29,7 @@ export class FlightsComponent {
       const passengers = params.get('passengers');
       const type = params.get('type');
 
-      if (!origin || !destinations || !goDate || !backDate || !passengers || !type) return
+      if (!origin || !destinations || !goDate || (!backDate && type == 'round_trip') || !passengers || !type) return
 
       const query = {
         origin,

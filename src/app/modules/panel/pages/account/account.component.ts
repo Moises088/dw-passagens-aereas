@@ -22,7 +22,7 @@ export class AccountComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.toggleTab('information');
+    this.toggleTab('flights');
   }
 
   toggleTab(tab: string) {

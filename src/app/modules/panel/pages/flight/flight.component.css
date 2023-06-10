@@ -153,3 +153,23 @@ h3 {
     outline: none;
     padding: 0 10px;
 }
+
+.payment-overlay {
+    background-color: rgb(17, 75, 1);
+    color: #FFF;
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.payment-overlay img {
+    width: 300px;
+    height: 300px;
+}

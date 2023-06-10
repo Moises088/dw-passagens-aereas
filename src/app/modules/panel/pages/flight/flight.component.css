@@ -1,5 +1,5 @@
 .container-fl {
-    padding: 30px 0;
+    padding: 40px 0;
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
@@ -39,10 +39,97 @@ h3 {
     border-radius: 4px;
 }
 
-.details {
-    background-color: #FFF;
-    padding: 18px;
-    box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.05);
+.details {}
+
+.details p {
+    padding: 5px 0;
+}
+
+.card-price {
     border-radius: 10px;
-    padding-top: 10px;
+    width: 23%;
+    padding: 10px;
+    height: 210px;
+    padding-left: 15px;
+    position: relative;
+    background-color: #FFF;
+    box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.1);
+    min-height: 40vh;
+}
+
+.card-total {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.total {
+    display: flex;
+    align-items: center;
+}
+
+.card-total span {
+    margin-right: 6px;
+}
+
+.card-total h2 {
+    font-weight: 500;
+    margin: 0;
+    font-size: 32px;
+}
+
+.card-total .pix {
+    padding: 4px 10px;
+    font-size: 11px;
+    border-radius: 10px;
+    background-color: rgba(29, 117, 5, 0.63);
+    color: #FFF;
+}
+
+.desc {
+    font-size: 14px;
+}
+
+.desc b {
+    font-weight: 500;
+}
+
+.btn-buy {
+    position: absolute;
+    bottom: 10px;
+    background: linear-gradient(308.6deg, rgb(242, 71, 63) -7.94%, rgb(234, 61, 53) 79.38%);
+    width: calc(100% - 20px);
+    height: 44px;
+    cursor: pointer;
+    transition: all ease 0.1s;
+    padding-inline: 40px;
+    border-radius: 10px;
+    color: #FFF;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.btn-buy:hover {
+    background: linear-gradient(308.6deg, rgb(234, 61, 53) -7.94%, rgb(242, 71, 63) 79.38%);
+}
+
+.selected-seat {
+    margin-top: 20px;
+}
+
+.selected-seats {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.selected-seats p {
+    width: 40px;
+    height: 40px;
+    background-color: #408541;
+    color: #fff;
+    padding: 10px;
+    margin-top: 4px;
+    margin-right: 4px;
 }

@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FlightsService } from '../../services/flights.service';
 import { lastValueFrom } from 'rxjs';
+import { SearchContainerComponent } from '../../components/search-container/search-container.component';
 
 @Component({
   selector: 'app-flights',
@@ -10,7 +11,9 @@ import { lastValueFrom } from 'rxjs';
 })
 export class FlightsComponent {
 
-  flights: any = []
+  @ViewChild(SearchContainerComponent) searchContainerComponent!: SearchContainerComponent;
+
+  flights: any = [];
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
@@ -26,6 +29,8 @@ export class FlightsComponent {
       const passengers = params.get('passengers');
       const type = params.get('type');
 
+      if (!origin || !destinations || !goDate || !backDate || !passengers || !type) return
+
       const query = {
         origin,
         destinations,
@@ -36,7 +41,10 @@ export class FlightsComponent {
       };
 
       this.getFlights(query);
+
+      this.searchContainerComponent.loadFilter(parseInt(origin), parseInt(destinations), goDate, backDate, passengers, type)
     });
+
   }
 
   async getFlights(query: any) {

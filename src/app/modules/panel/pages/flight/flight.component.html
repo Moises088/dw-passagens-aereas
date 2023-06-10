@@ -21,13 +21,46 @@
     </div>
 
     <div class="details">
-        <h3>Detalhe da viagem</h3>
+      <h3>Detalhe da viagem</h3>
 
-        <p>De: </p>
-        <p>Para: </p>
-        <p>Passageiros: </p>
-        <p>Ida: </p>
-        <p>Volta: </p>
+      <p>De: {{ flight?.origin?.address }}</p>
+      <p>Para: {{ flight?.destination?.address }}</p>
+      <p>Passageiro(s): {{ flight?.passengers }}</p>
+      <p>Ida: {{ flight?.departure_date }}</p>
+
+      <div class="selected-seat">
+        <h4>Assentos Selecionados:</h4>
+        <div class="selected-seats">
+          <p *ngFor="let seat of selectedSeats">{{ seat.seat }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-price" *ngIf="flight">
+      <p>Total</p>
+      <div class="card-total">
+        <div class="total">
+          <span>R$</span>
+          <h2>{{ formatNumber(flight.pix) }}</h2>
+        </div>
+
+        <div class="pix">PIX</div>
+      </div>
+      <div style="margin-bottom: 10px">
+        <span class="desc"
+          >Economia de <b>R$ {{ getEconomy() }}</b> no pix</span
+        >
+      </div>
+      <div>
+        <span style="font-size: 15px">
+          Ou {{ getPaymentCard().installment }}x R$
+          {{ formatNumber(getPaymentCard().installmentAmount) }}</span
+        >
+      </div>
+
+      <div>
+        <button class="btn btn-buy" (click)="buyFlight()">Comprar</button>
+      </div>
     </div>
   </div>
 </div>

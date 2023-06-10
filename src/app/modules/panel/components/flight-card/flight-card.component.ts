@@ -14,9 +14,8 @@ export class FlightCardComponent {
     private readonly router: Router
   ) { }
 
-  buyFlight() {
-    const flightId = 123;
-    this.router.navigate(['/voo', flightId]);
+  buyFlight(flightId: any) {
+    this.router.navigate(['/voo/' + flightId + "/" + this.flight.passengers]);
   }
 
   getPaymentCard() {

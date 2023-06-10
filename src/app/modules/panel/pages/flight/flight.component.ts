@@ -1,4 +1,7 @@
 import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { FlightsService } from '../../services/flights.service';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-flight',
@@ -9,7 +12,76 @@ export class FlightComponent implements AfterViewInit {
   @ViewChild('seatingCanvas', { static: true })
   seatingCanvasRef!: ElementRef<HTMLCanvasElement>;
 
+  flight: any;
+  selectedSeats: { id: number, seat: string, active: boolean }[] = [];
+
+  constructor(
+    private readonly activatedRoute: ActivatedRoute,
+    private readonly flightsService: FlightsService
+  ) { }
+
   ngAfterViewInit() {
+    const vooId = this.activatedRoute.snapshot.paramMap.get('id');
+    const passengers = this.activatedRoute.snapshot.paramMap.get('passengers');
+    console.log(vooId, passengers); // Exibe "11" no console
+    if (!vooId || !passengers) return
+
+    this.getFlight(vooId, passengers)
+  }
+
+  private async getFlight(vooId: string, passengers: string) {
+    const flight = await lastValueFrom(this.flightsService.getFlightId(vooId, passengers));
+    this.flight = flight;
+    console.log(flight)
+    this.generateCanvas()
+  }
+
+
+  async buyFlight() {
+    const numPassengers = parseInt(this.flight.passengers);
+
+    if (this.selectedSeats.length !== numPassengers) {
+      alert('Você deve selecionar assentos para todos os passageiros.');
+      return;
+    }
+
+    // Restante do código da função buyFlight()
+  }
+
+  selectSeat(seatId: { id: number, seat: string, active: boolean }) {
+    const numPassengers = parseInt(this.flight.passengers);
+
+    if (numPassengers === 1) {
+      this.selectedSeats = [seatId];
+    } else if (numPassengers > 1) {
+      if (this.selectedSeats.length < numPassengers) {
+        const seatAlreadySelected = this.selectedSeats.some(seat => seat.id === seatId.id);
+        if (!seatAlreadySelected) {
+          this.selectedSeats.push(seatId);
+        }
+      } else {
+        this.selectedSeats.pop(); // Remove o último assento selecionado
+        this.selectedSeats.push(seatId);
+      }
+    }
+  }
+
+  getPaymentCard() {
+    return this.flight.installmentAmounts[this.flight.installmentAmounts.length - 1]
+  }
+
+  formatNumber(number: number) {
+    return parseFloat(String(number)).toFixed(2).replace(".", ',')
+  }
+
+  getEconomy() {
+    const card = this.getPaymentCard()
+    const total = parseInt(card.installment) * parseFloat(card.installmentAmount);
+
+    return this.formatNumber(total - parseFloat(this.flight.pix))
+  }
+
+  private generateCanvas() {
     const canvas = this.seatingCanvasRef.nativeElement;
     const context = canvas.getContext('2d');
 
@@ -18,7 +90,7 @@ export class FlightComponent implements AfterViewInit {
     // Definir cores, tamanho dos assentos e espaçamento
     const availableColor = '#408541';
     const unavailableColor = '#616361';
-    const hoverColor = '#ff0000'; // Cor ao passar o mouse sobre o assento
+    const hoverColor = '#408511'; // Cor ao passar o mouse sobre o assento
     const seatWidth = 40;
     const seatHeight = 40;
     const seatSpacing = 10;
@@ -94,7 +166,8 @@ export class FlightComponent implements AfterViewInit {
         const seatX = (seatWidth + seatSpacing) * j;
         const seatLabel = `${rowLabel}${seatNumber}`;
 
-        const isSeatAvailable = seatIndex < seatsPerGroup[seatGroupIndex];
+        const find = this.flight.seats.find((s: { seat: string }) => s.seat.trim() == seatLabel)
+        const isSeatAvailable = find?.active ? find.active : false;
         const isSeatHovered = false; // Estado inicial ao carregar o Canvas
 
         drawSeat(seatX, rowY, isSeatAvailable, isSeatHovered);
@@ -109,8 +182,9 @@ export class FlightComponent implements AfterViewInit {
         const seatX = (seatWidth + seatSpacing) * (j + leftSeats);
         const seatLabel = `${rowLabel}${seatNumber}`;
 
-        const isSeatAvailable = seatIndex < seatsPerGroup[seatGroupIndex];
-        const isSeatHovered = false; // Estado inicial ao carregar o Canvas
+        const find = this.flight.seats.find((s: { seat: string }) => s.seat.trim() == seatLabel)
+        const isSeatAvailable = find?.active ? find.active : false;
+        const isSeatHovered = true; // Estado inicial ao carregar o Canvas
 
         drawSeat(seatX, rowY, isSeatAvailable, isSeatHovered);
         drawSeatLabel(seatX, rowY, seatLabel);
@@ -124,7 +198,8 @@ export class FlightComponent implements AfterViewInit {
         const seatX = (seatWidth + seatSpacing) * (j + leftSeats + seatsPerGroup[seatGroupIndex]);
         const seatLabel = `${rowLabel}${seatNumber}`;
 
-        const isSeatAvailable = seatIndex < seatsPerGroup[seatGroupIndex];
+        const find = this.flight.seats.find((s: { seat: string }) => s.seat.trim() == seatLabel)
+        const isSeatAvailable = find?.active ? find.active : false;
         const isSeatHovered = false; // Estado inicial ao carregar o Canvas
 
         drawSeat(seatX, rowY, isSeatAvailable, isSeatHovered);
@@ -150,7 +225,8 @@ export class FlightComponent implements AfterViewInit {
 
         for (let j = 0; j < seatsPerRow; j++) {
           const seatX = (seatWidth + seatSpacing) * j;
-          const isSeatAvailable = seatIndex < seatsPerGroup[seatGroupIndex];
+          const find = this.flight.seats.find((s: { seat: string }) => s.seat.trim() == `${rows[i]}${j + 1}`)
+          const isSeatAvailable = find?.active ? find.active : false;
           const isSeatHovered = isMouseOverSeat(mousePos.x, mousePos.y, seatX, rowY);
 
           drawSeat(seatX, rowY, isSeatAvailable, isSeatHovered);
@@ -181,7 +257,14 @@ export class FlightComponent implements AfterViewInit {
 
           if (isMouseOverSeat(mousePos.x, mousePos.y, seatX, rowY)) {
             const seatLabel = `${rows[i]}${j + 1}`;
-            alert(`Selected seat: ${seatLabel}`);
+            const foundSeat = this.flight.seats.find((s: { seat: string }) => s.seat.trim() === seatLabel);
+            console.log(foundSeat, seatLabel)
+            if (!foundSeat) {
+              alert('Esse assento não está disponível');
+            } else {
+              this.selectSeat(foundSeat);
+            }
+
           }
 
           seatIndex++;

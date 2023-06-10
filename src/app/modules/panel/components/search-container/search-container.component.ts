@@ -110,4 +110,16 @@ export class SearchContainerComponent {
   changeType(type: 'round_trip' | 'one_way') {
     this.type = type;
   }
+
+  async loadFilter(origin_id: number, destination_id: number, goDate: string, backDate: string, passengers: string, type: any) {
+    const origin: any = await lastValueFrom(this.autocompleteService.placeId(origin_id));
+    const destinations: any = await lastValueFrom(this.autocompleteService.placeId(destination_id));
+
+    this.origin = origin;
+    this.destinations = destinations;
+    this.goDate = goDate;
+    this.backDate = backDate;
+    this.passengersCount = parseInt(passengers);
+    this.type = type;
+  }
 }

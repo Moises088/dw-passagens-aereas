@@ -10,7 +10,7 @@
     >
       Ida + Volta
     </div>
-    
+
     <div
       class="container-type {{
         type == 'one_way' ? 'container-type-active' : ''
@@ -105,6 +105,7 @@
       <div
         class="group"
         [class.has-error]="formErrors['backDate'] || formErrors['dateError']"
+        *ngIf="type == 'round_trip'"
       >
         <label for="date-volta-input">Data de volta</label>
         <div class="input-group">

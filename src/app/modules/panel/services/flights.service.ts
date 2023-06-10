@@ -11,4 +11,8 @@ export class FlightsService {
   getFlights(query: any) {
     return this.api.get('flight/getall', query)
   }
+
+  getFlightId(id: string, passengers: string) {
+    return this.api.get('flight/' + id + "/" + passengers)
+  }
 }

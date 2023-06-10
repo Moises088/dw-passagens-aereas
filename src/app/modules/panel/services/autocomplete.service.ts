@@ -13,4 +13,8 @@ export class AutocompleteService {
   autocomplete(q: string) {
     return this.api.get("place/autocomplete", { q })
   }
+
+  placeId(id: number) {
+    return this.api.get("place/" + id)
+  }
 }

@@ -36,7 +36,7 @@ export class NavbarComponent {
   home() {
     this.router.navigate(['/'])
   }
-
+  
   changeRouter(url: string) {
     if (this.showButtonRestrict.includes(url)) {
       this.showButtonLogin = false;
@@ -44,7 +44,7 @@ export class NavbarComponent {
       this.showButtonLogin = true;
     }
   }
-
+  
   async getUserData() {
     const getUserData = await this.authService.getUserData();
     console.log(getUserData?.name)
@@ -52,8 +52,8 @@ export class NavbarComponent {
       this.userData = getUserData;
     }
   }
-
+  
   async account() {
-    
+    this.router.navigate(['/conta'])
   }
 }

@@ -13,6 +13,8 @@ import { FormsModule } from '@angular/forms';
 import { NgxMaskModule } from 'ngx-mask';
 import { CoreModule } from 'src/app/core/core.module';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
+import { AccountComponent } from './pages/account/account.component';
+import { AccountFlightComponent } from './components/account-flight/account-flight.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { AutocompleteLibModule } from 'angular-ng-autocomplete';
     PromotionCardComponent,
     FlightsComponent,
     FlightCardComponent,
-    FlightComponent
+    FlightComponent,
+    AccountComponent,
+    AccountFlightComponent
   ],
   imports: [
     CommonModule,

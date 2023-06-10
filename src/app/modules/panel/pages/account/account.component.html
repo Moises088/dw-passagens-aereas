@@ -1,0 +1,45 @@
+<div class="container">
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        [class.active]="showInformationTab"
+        (click)="toggleTab('information')"
+        >Suas informações</a
+      >
+    </li>
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        [class.active]="showFlightsTab"
+        (click)="toggleTab('flights')"
+        >Seus Voos</a
+      >
+    </li>
+  </ul>
+
+  <div class="tab-content">
+    <div
+      class="tab-pane"
+      [class.active]="showInformationTab"
+      *ngIf="showInformationTab"
+    >
+      <h2>Suas informações</h2>
+      <p><b>Email:</b> {{ user.email }}</p>
+      <p><b>Nome:</b> {{ user.name }}</p>
+      <p><b>Telefone:</b> {{ user.phone ?? "---" }}</p>
+    </div>
+
+    <div
+      class="tab-pane"
+      [class.active]="showFlightsTab"
+      *ngIf="showFlightsTab"
+    >
+      <h2>Seus voos</h2>
+      <app-account-flight
+        *ngFor="let flight of flights"
+        [flight]="flight"
+      ></app-account-flight>
+    </div>
+  </div>
+</div>

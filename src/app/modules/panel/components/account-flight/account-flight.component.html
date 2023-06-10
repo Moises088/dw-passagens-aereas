@@ -1,0 +1,96 @@
+<div class="card">
+  <div class="card-container">
+    <div class="card-logo">
+      <img src="{{ flight.airline_company.logo }}" alt="" />
+    </div>
+
+    <div class="card-infos">
+      <div class="card-info-left">
+        <i class="fa-solid fa-plane"></i>
+        <span>
+          <b>IDA</b>
+          <br />
+          {{ flight.origin }}
+          <br />
+          {{ flight.destination }}
+        </span>
+
+        <div class="card-date">
+          <b>{{ flight.departure_date }}</b>
+          <!-- <p><small>03:10 - 0 paradas</small></p> -->
+        </div>
+      </div>
+
+      <div class="card-info-right" *ngIf="flight?.return_date">
+        <i class="fa-solid fa-plane"></i>
+        <span>
+          <b>VOLTA</b>
+          <br />
+          {{ flight.destination }}
+          <br />
+          {{ flight.origin }}
+        </span>
+
+        <div class="card-date">
+          <b>{{ flight.return_date }}</b>
+          <!-- <p><small>03:10 - 0 paradas</small></p> -->
+        </div>
+      </div>
+
+      <div class="card-info-extra">
+        <div class="info-extra">
+          <div class="icon">
+            <i class="fa-regular fa-calendar"></i>
+          </div>
+          {{ "--" }}
+        </div>
+        <div class="info-extra">
+          <div class="icon">
+            <i class="fa-solid fa-users"></i>
+          </div>
+          {{ flight.passengers }} adulto(s)
+        </div>
+      </div>
+    </div>
+    <div class="card-price">
+      <p>Total</p>
+      <div class="card-total">
+        <div class="total">
+          <span>R$</span>
+          <h2 *ngIf="showInstallmentPayment()">
+            {{ formatNumber(flight.pix) }}
+          </h2>
+          <h2 *ngIf="!showInstallmentPayment()">
+            {{ getPaymentCard().installment }}x R$
+            {{ formatNumber(getPaymentCard().installmentAmount) }}
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Assento</th>
+        <th>Status</th>
+        <th>Pagamento</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let seat of flight.seats">
+        <td>{{ seat.seat }}</td>
+        <td>{{ translateStatus(seat.ticket.status) }}</td>
+        <td>{{ translatePaymentMode(seat.ticket.payment_mode) }}</td>
+        <td>
+            <span [ngSwitch]="seat.ticket.status">
+              <i class="fas fa-check-circle icon-success" *ngSwitchCase="'PAID'"></i>
+              <i class="fas fa-exclamation-circle icon-warning" *ngSwitchCase="'AWAITING_PAYMENT'"></i>
+              <i class="fas fa-times-circle icon-danger" *ngSwitchCase="'CANCELED'"></i>
+            </span>
+          </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

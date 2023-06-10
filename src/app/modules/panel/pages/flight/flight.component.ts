@@ -15,6 +15,14 @@ export class FlightComponent implements AfterViewInit {
   flight: any;
   selectedSeats: { id: number, seat: string, active: boolean }[] = [];
 
+  paymentModes = [
+    { id: 'CREDIT_CARD', label: "Cartão de crédito" },
+    { id: 'DEBIT_CARD', label: "Cartão de débito" },
+    { id: 'PIX', label: "PIX" },
+    { id: 'BOLETO', label: 'BOLETO' }
+  ];
+  selectedPaymentMode: string = "";
+
   constructor(
     private readonly activatedRoute: ActivatedRoute,
     private readonly flightsService: FlightsService
@@ -37,7 +45,6 @@ export class FlightComponent implements AfterViewInit {
     this.generateCanvas()
   }
 
-
   async buyFlight() {
     const numPassengers = parseInt(this.flight.passengers);
 
@@ -46,7 +53,25 @@ export class FlightComponent implements AfterViewInit {
       return;
     }
 
-    // Restante do código da função buyFlight()
+    if (!this.selectedPaymentMode) {
+      alert('Você deve selecionar o modo de pagamento.');
+      return;
+    }
+
+    const seats = this.selectedSeats.map(seat => seat.id);
+
+    const ticketData = {
+      seats,
+      payment_mode: this.selectedPaymentMode
+    };
+
+    try {
+      const response = await lastValueFrom(this.flightsService.buyTicket(ticketData));
+      window.location.href = ""
+      // Faça algo com a resposta, se necessário
+    } catch (error: any) {
+      alert(error.error.message);
+    }
   }
 
   selectSeat(seatId: { id: number, seat: string, active: boolean }) {
@@ -263,7 +288,7 @@ export class FlightComponent implements AfterViewInit {
             if (!foundSeat) {
               alert('Esse assento não está disponível');
             } else {
-              this.selectSeat(foundSeat);
+              if (foundSeat.active) this.selectSeat(foundSeat);
             }
 
           }

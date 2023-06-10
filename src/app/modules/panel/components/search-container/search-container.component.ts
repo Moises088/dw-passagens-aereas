@@ -67,7 +67,7 @@ export class SearchContainerComponent {
       this.formErrors['goDate'] = true;
     }
 
-    if (!this.backDate) {
+    if (!this.backDate && this.type == 'round_trip') {
       this.formErrors['backDate'] = true;
     }
 
@@ -89,6 +89,8 @@ export class SearchContainerComponent {
       passengers: this.passengersCount,
       type: this.type
     };
+
+    console.log(queryParams)
 
     this.router.navigate(['/voos'], { queryParams });
   }

@@ -28,6 +28,12 @@
       <p>Passageiro(s): {{ flight?.passengers }}</p>
       <p>Ida: {{ flight?.departure_date }}</p>
 
+      <img
+        src="{{ flight?.airline_company?.logo }}"
+        alt="logo"
+        class="airline_company"
+      />
+
       <div class="selected-seat">
         <h4>Assentos Selecionados:</h4>
         <div class="selected-seats">
@@ -57,6 +63,20 @@
           {{ formatNumber(getPaymentCard().installmentAmount) }}</span
         >
       </div>
+
+      <div class="payment">
+        <label for=""><b>Pagamento</b></label>
+        <select [(ngModel)]="selectedPaymentMode" name="paymentMode" required>
+          <option value="" disabled selected>
+            Selecione o modo de pagamento
+          </option>
+          <option *ngFor="let mode of paymentModes" [value]="mode.id">
+            {{ mode.label }}
+          </option>
+        </select>
+      </div>
+
+      <div style="height: 100px;"></div>
 
       <div>
         <button class="btn btn-buy" (click)="buyFlight()">Comprar</button>

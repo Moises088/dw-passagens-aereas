@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { lastValueFrom } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -73,7 +74,7 @@ export class ApiService {
     }
 
     try {
-      await this.get("/user/verify/token")
+      await lastValueFrom(this.get("user/verify/token"))
       return this.userData;
     } catch (error) {
       await localStorage.removeItem("userData")

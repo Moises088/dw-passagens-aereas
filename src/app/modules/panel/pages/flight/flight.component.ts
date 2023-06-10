@@ -25,6 +25,7 @@ export class FlightComponent implements AfterViewInit {
     const passengers = this.activatedRoute.snapshot.paramMap.get('passengers');
     console.log(vooId, passengers); // Exibe "11" no console
     if (!vooId || !passengers) return
+    if (parseInt(passengers) > 10) window.location.href = "";
 
     this.getFlight(vooId, passengers)
   }
